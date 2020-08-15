@@ -1,6 +1,8 @@
 import React from 'react';
+import TodosState from './context/todos/TodosState';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import TodoPage from './components/todos/TodoPage';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -21,11 +23,12 @@ firebase.initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <div className='App'>
+    <TodosState>
       <Header />
-      <h1>App</h1>
+      <h1>Todo App</h1>
+      <TodoPage />
       <Footer />
-    </div>
+    </TodosState>
   );
 }
 
