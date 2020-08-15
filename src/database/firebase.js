@@ -1,7 +1,3 @@
-import React from 'react';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -19,14 +15,4 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-function App() {
-  return (
-    <div className='App'>
-      <Header />
-      <h1>App</h1>
-      <Footer />
-    </div>
-  );
-}
-
-export default App;
+export default firebase;
