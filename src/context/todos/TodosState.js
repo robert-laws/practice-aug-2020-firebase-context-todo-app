@@ -1,7 +1,12 @@
 import React, { useReducer } from 'react';
 import TodosContext from './todosContext';
 import todosReducer from './todosReducer';
-import { GET_TODOS, ADD_TODO, UPDATE_TODO, DELETE_TODO } from '../types';
+import {
+  GET_TODOS_BY_USER_ID,
+  ADD_TODO,
+  UPDATE_TODO,
+  DELETE_TODO,
+} from '../types';
 import firebase from 'firebase/app';
 
 const TodosState = ({ children }) => {
@@ -11,11 +16,12 @@ const TodosState = ({ children }) => {
 
   const [state, dispatch] = useReducer(todosReducer, initialState);
 
-  const getTodos = async () => {
+  const getTodosByUserId = async (id) => {
     try {
       const todosSnapshot = await firebase
         .firestore()
         .collection('todos')
+        .where('userId', '==', id)
         .get();
 
       const todos = todosSnapshot.docs.map((todo) => ({
@@ -23,7 +29,7 @@ const TodosState = ({ children }) => {
         id: todo.id,
       }));
 
-      dispatch({ type: GET_TODOS, payload: todos });
+      dispatch({ type: GET_TODOS_BY_USER_ID, payload: todos });
     } catch (error) {
       console.error('Error getting todos: ', error);
     }
@@ -71,7 +77,7 @@ const TodosState = ({ children }) => {
     <TodosContext.Provider
       value={{
         todos: state.todos,
-        getTodos,
+        getTodosByUserId,
         addTodo,
         updateTodo,
         deleteTodo,

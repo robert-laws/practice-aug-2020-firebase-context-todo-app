@@ -1,4 +1,9 @@
-import { ADD_TODO, GET_TODOS, UPDATE_TODO, DELETE_TODO } from '../types';
+import {
+  ADD_TODO,
+  GET_TODOS_BY_USER_ID,
+  UPDATE_TODO,
+  DELETE_TODO,
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -8,7 +13,7 @@ export default (state, action) => {
         todos: [...state.todos, action.payload],
       };
 
-    case GET_TODOS:
+    case GET_TODOS_BY_USER_ID:
       return {
         ...state,
         todos: action.payload,

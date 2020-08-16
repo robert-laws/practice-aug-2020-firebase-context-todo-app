@@ -1,34 +1,52 @@
-import React from 'react';
-import TodosState from './context/todos/TodosState';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+// import { useAuth } from './components/auth/useAuth';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import LoginPage from './components/auth/LoginPage';
 import TodoPage from './components/todos/TodoPage';
-
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: 'AIzaSyDP5X8zo8TcNWk331hjWFSZTxsl2NtZVS0',
-  authDomain: 'practice-aug-2020-todo-app.firebaseapp.com',
-  databaseURL: 'https://practice-aug-2020-todo-app.firebaseio.com',
-  projectId: 'practice-aug-2020-todo-app',
-  storageBucket: 'practice-aug-2020-todo-app.appspot.com',
-  messagingSenderId: '980408949602',
-  appId: '1:980408949602:web:f31d3fbc8d7177b300ea3b',
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+import UserProfile from './components/user/UserProfile';
+import AuthContext from './context/auth/authContext';
+import UserState from './context/user/UserState';
 
 function App() {
+  // const { isLoading, user } = useAuth();
+  // console.log(user);
+
+  const authContext = useContext(AuthContext);
+  const { isLoading, user } = authContext;
+
   return (
-    <TodosState>
+    <>
       <Header />
-      <h1>Todo App</h1>
-      <TodoPage />
+      <Router>
+        <Switch>
+          <Route path='/login'>
+            <LoginPage />
+          </Route>
+          <ProtectedRoute
+            isAuthed={!!user}
+            isLoading={isLoading}
+            path='/'
+            exact
+          >
+            <TodoPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            isAuthed={!!user}
+            isLoading={isLoading}
+            path='/user'
+            exact
+          >
+            <UserState>
+              <UserProfile userId={user} />
+            </UserState>
+          </ProtectedRoute>
+        </Switch>
+      </Router>
       <Footer />
-    </TodosState>
+    </>
   );
 }
 
