@@ -3,6 +3,7 @@ export const UPDATE_AUTH = 'ADD_AUTH';
 
 // User Types
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const UPDATE_USER_BY_USER_ID = 'UPDATE_USER_BY_USER_ID';
 
 // Todos Types
 export const ADD_TODO = 'ADD_TODO';

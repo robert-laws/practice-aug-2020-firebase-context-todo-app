@@ -33,16 +33,16 @@ function App() {
           >
             <TodoPage />
           </ProtectedRoute>
-          <ProtectedRoute
-            isAuthed={!!user}
-            isLoading={isLoading}
-            path='/user'
-            exact
-          >
-            <UserState>
+          <UserState>
+            <ProtectedRoute
+              isAuthed={!!user}
+              isLoading={isLoading}
+              path='/user'
+              exact
+            >
               <UserProfile userId={user} />
-            </UserState>
-          </ProtectedRoute>
+            </ProtectedRoute>
+          </UserState>
         </Switch>
       </Router>
       <Footer />

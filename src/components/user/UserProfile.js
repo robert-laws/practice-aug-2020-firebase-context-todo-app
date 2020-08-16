@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import UpdateProfileForm from './UpdateProfileForm';
 import UserContext from '../../context/user/userContext';
 
 const UserProfile = ({ userId }) => {
@@ -18,15 +19,19 @@ const UserProfile = ({ userId }) => {
   }
 
   return (
-    <div>
-      <h3>User Profile</h3>
-      <p>
-        Name: {profile.firstName} {profile.lastName}
-      </p>
-      <p>Bio: {profile.bio}</p>
-      <p>Age: {profile.age}</p>
-      <p>Admin: {profile.admin ? 'Yes' : 'No'}</p>
-    </div>
+    <>
+      <div>
+        <h3>User Profile</h3>
+        <p>
+          Name: {profile.firstName} {profile.lastName}
+        </p>
+        <p>Bio: {profile.bio}</p>
+      </div>
+      <hr />
+      <div>
+        <UpdateProfileForm userId={userId} />
+      </div>
+    </>
   );
 };
 
