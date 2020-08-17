@@ -4,6 +4,9 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // import { useAuth } from './components/auth/useAuth';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import CreateAccountForm from './components/auth/CreateAccountForm';
+import EmailFailure from './components/auth/EmailFailure';
+import EmailSuccess from './components/auth/EmailSuccess';
 import LoginPage from './components/auth/LoginPage';
 import TodoPage from './components/todos/TodoPage';
 import UserProfile from './components/user/UserProfile';
@@ -24,6 +27,15 @@ function App() {
         <Switch>
           <Route path='/login'>
             <LoginPage />
+          </Route>
+          <Route path='/new-user'>
+            <CreateAccountForm />
+          </Route>
+          <Route path='/email-failure'>
+            <EmailFailure />
+          </Route>
+          <Route path='/email-success'>
+            <EmailSuccess />
           </Route>
           <ProtectedRoute
             isAuthed={!!user}
