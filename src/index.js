@@ -8,6 +8,7 @@ import TodosState from './context/todos/TodosState';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/functions';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -22,6 +23,8 @@ var firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+firebase.functions().useFunctionsEmulator('http://localhost:5001');
 
 ReactDOM.render(
   <React.StrictMode>
